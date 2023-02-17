@@ -10,21 +10,22 @@ set tabstop=4
 set expandtab
 set shiftwidth=4
 set softtabstop=4
-set background=dark
+set noswapfile
 syntax on
+
+let g:do_filetype_lua=1
 
 call plug#begin()
 
 Plug 'vim/colorschemes'
 Plug 'rose-pine/neovim'
+Plug 'sainnhe/everforest'
 Plug 'pgdouyon/vim-yin-yang'
 Plug 'ron89/thesaurus_query.vim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'kyazdani42/nvim-tree.lua'
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'Qiskit/openqasm', {'rtp': 'plugins/vim/'}
 
@@ -42,7 +43,7 @@ call plug#end()
 lua << EOF
 require'nvim-treesitter.configs'.setup {
     -- A list of parser names, or "all"
-  ensure_installed = { "c", "python", "cpp", "latex", "make", "cmake", "markdown", "json", "lua"},
+  ensure_installed = { "c", "python", "cpp", "latex", "make", "cmake", "markdown", "json", "lua", "verilog"},
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -101,8 +102,8 @@ EOF
 
 lua << EOF
 require("nvim-tree").setup({
-    open_on_setup=true,
-    open_on_setup_file=true,
+--    open_on_setup=true,
+--    open_on_setup_file=true,
     hijack_cursor=true,
     sort_by = "extension",
     view = {
@@ -126,9 +127,16 @@ require("nvim-tree").setup({
     filters = {
         dotfiles=true,
     },
+
 })
 EOF
 
-colorscheme rose-pine
+lua << EOF
+require("nvim-tree.api").tree.open()
+EOF
 
+
+set background=light
+let g:everforest_background='soft'
+colorscheme everforest
 
