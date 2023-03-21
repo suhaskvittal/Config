@@ -22,6 +22,7 @@ Plug 'rose-pine/neovim'
 Plug 'sainnhe/everforest'
 Plug 'pgdouyon/vim-yin-yang'
 Plug 'ron89/thesaurus_query.vim'
+Plug 'ChristianChiarulli/nvcode-color-schemes.vim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
@@ -135,8 +136,7 @@ lua << EOF
 require("nvim-tree.api").tree.open()
 EOF
 
+let g:nvcode_termcolors=256
 
-set background=light
-let g:everforest_background='soft'
-colorscheme everforest
-
+syntax on
+colorscheme nvcode
