@@ -33,12 +33,6 @@ Plug 'Qiskit/openqasm', {'rtp': 'plugins/vim/'}
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
-Plug 'tpope/vim-abolish'
-Plug 'preservim/vim-pencil'
-Plug 'Pocco81/HighStr.nvim'
-Plug 'rhysd/vim-grammarous'
-Plug 'vigoux/LanguageTool.nvim'
-
 call plug#end()
 
 lua << EOF
@@ -126,8 +120,7 @@ require("nvim-tree").setup({
         highlight_opened_files="name",
     },
     filters = {
-        dotfiles=true,
-    },
+        dotfiles=true, },
 
 })
 EOF
@@ -136,7 +129,58 @@ lua << EOF
 require("nvim-tree.api").tree.open()
 EOF
 
-let g:nvcode_termcolors=256
+lua << EOF
+require('rose-pine').setup({
+    --- @usage 'auto'|'main'|'moon'|'dawn'
+    variant = 'dawn',
+    --- @usage 'main'|'moon'|'dawn'
+    dark_variant = 'moon',
+    bold_vert_split = true,
+    dim_nc_background = false,
+    disable_background = false,
+    disable_float_background = false,
+    disable_italics = false,
 
-syntax on
-colorscheme nvcode
+    --- @usage string hex value or named color from rosepinetheme.com/palette
+    groups = {
+        background = 'base',
+        background_nc = '_experimental_nc',
+        panel = 'surface',
+        panel_nc = 'base',
+        border = 'highlight_med',
+        comment = '#8f1a54',
+        link = 'iris',
+        punctuation = 'subtle',
+
+        error = 'love',
+        hint = 'iris',
+        info = 'foam',
+        warn = 'gold',
+
+        headings = {
+            h1 = 'iris',
+            h2 = 'foam',
+            h3 = 'rose',
+            h4 = 'gold',
+            h5 = 'pine',
+            h6 = 'foam',
+        }
+        -- or set all headings at once
+        -- headings = 'subtle'
+    },
+
+    -- Change specific vim highlight groups
+    -- https://github.com/rose-pine/neovim/wiki/Recipes
+    highlight_groups = {
+        ColorColumn = { bg = 'rose' },
+
+        -- Blend colours against the "base" background
+        CursorLine = { bg = '#eeffff', blend = 10 },
+        StatusLine = { fg = 'love', bg = 'love', blend = 10 },
+    }
+})
+EOF
+
+set background=light
+colorscheme rose-pine
+
