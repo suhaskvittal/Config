@@ -17,21 +17,17 @@ let g:do_filetype_lua=1
 
 call plug#begin()
 
-Plug 'vim/colorschemes'
 Plug 'rose-pine/neovim'
-Plug 'sainnhe/everforest'
-Plug 'pgdouyon/vim-yin-yang'
-Plug 'ron89/thesaurus_query.vim'
-Plug 'ChristianChiarulli/nvcode-color-schemes.vim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'kyazdani42/nvim-tree.lua'
 
-Plug 'Qiskit/openqasm', {'rtp': 'plugins/vim/'}
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'romgrk/barbar.nvim'
 
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
+Plug 'Qiskit/openqasm', {'rtp': 'plugins/vim/'}
 
 call plug#end()
 
@@ -136,7 +132,7 @@ require('rose-pine').setup({
     --- @usage 'main'|'moon'|'dawn'
     dark_variant = 'moon',
     bold_vert_split = true,
-    dim_nc_background = false,
+    dim_nc_background = true,
     disable_background = false,
     disable_float_background = false,
     disable_italics = false,
@@ -148,7 +144,8 @@ require('rose-pine').setup({
         panel = 'surface',
         panel_nc = 'base',
         border = 'highlight_med',
-        comment = '#8f1a54',
+---     comment = '#8f1a54',
+        comment = '#b5f5f2',
         link = 'iris',
         punctuation = 'subtle',
 
@@ -175,12 +172,19 @@ require('rose-pine').setup({
         ColorColumn = { bg = 'rose' },
 
         -- Blend colours against the "base" background
-        CursorLine = { bg = '#eeffff', blend = 10 },
-        StatusLine = { fg = 'love', bg = 'love', blend = 10 },
+---     CursorLine = { bg = '#eeffff', blend = 10 },
+        CursorLine = { bg = '#273170', blend = 10 },
+        StatusLine = { fg = '#000000', bg = 'love', blend = 10 },
     }
 })
 EOF
 
-set background=light
+nnoremap <silent>   <C-h> <Cmd>BufferPrevious<CR>
+nnoremap <silent>   <C-l> <Cmd>BufferNext<CR>
+nnoremap <silent>   <C-x> <Cmd>BufferClose<CR>
+nnoremap <silent>   <C-j> <Cmd>BufferMovePrevious<CR>
+nnoremap <silent>   <C-k> <Cmd>BufferMoveNext<CR>
+
+set background=dark
 colorscheme rose-pine
 
