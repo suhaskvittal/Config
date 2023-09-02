@@ -50,8 +50,7 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
 
     -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-    -- the name of the parser)
+    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is -- the name of the parser)
     -- list of language that will be disabled
     disable = {  },
 
@@ -130,10 +129,10 @@ require('rose-pine').setup({
     --- @usage 'auto'|'main'|'moon'|'dawn'
     variant = 'dawn',
     --- @usage 'main'|'moon'|'dawn'
-    dark_variant = 'moon',
+    dark_variant = 'main',
     bold_vert_split = true,
-    dim_nc_background = true,
-    disable_background = false,
+    dim_nc_background = false,
+    disable_background = true,
     disable_float_background = false,
     disable_italics = false,
 
@@ -144,8 +143,8 @@ require('rose-pine').setup({
         panel = 'surface',
         panel_nc = 'base',
         border = 'highlight_med',
----     comment = '#8f1a54',
-        comment = '#b5f5f2',
+        comment = '#8f1a54',
+---     comment = '#b5f5f2',
         link = 'iris',
         punctuation = 'subtle',
 
@@ -173,8 +172,9 @@ require('rose-pine').setup({
 
         -- Blend colours against the "base" background
 ---     CursorLine = { bg = '#eeffff', blend = 10 },
-        CursorLine = { bg = '#273170', blend = 10 },
-        StatusLine = { fg = '#000000', bg = 'love', blend = 10 },
+---     CursorLine = { bg = '#273170' },
+        CursorLine = { bg = '#ffd2e8', blend = 100 },
+        StatusLine = { fg = '#000000', bg = 'love', blend = 70 },
     }
 })
 EOF
@@ -185,6 +185,5 @@ nnoremap <silent>   <C-x> <Cmd>BufferClose<CR>
 nnoremap <silent>   <C-j> <Cmd>BufferMovePrevious<CR>
 nnoremap <silent>   <C-k> <Cmd>BufferMoveNext<CR>
 
-set background=dark
+set background=light
 colorscheme rose-pine
-
