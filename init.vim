@@ -17,21 +17,38 @@ let g:do_filetype_lua=1
 
 call plug#begin()
 
-Plug 'rose-pine/neovim'
+" Writing plugins
+" Plug 'lukas-reineke/headlines.nvim'
+Plug 'ellisonleao/glow.nvim'
 
+" Theme plugins
+Plug 'rose-pine/neovim'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }  " IN USE
+
+" Tree sitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'kyazdani42/nvim-tree.lua'
 
+" Other
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
 
+Plug 'Pocco81/true-zen.nvim'
+
+" Syntax plugins for tree-sitter.
 Plug 'Qiskit/openqasm', {'rtp': 'plugins/vim/'}
 
 call plug#end()
 
 lua << EOF
+require('glow').setup({
+    width_ratio = 0.9,
+    height_ratio = 0.9,
+    border = 'rounded'
+})
+
 require'nvim-treesitter.configs'.setup {
     -- A list of parser names, or "all"
   ensure_installed = { "c", "python", "cpp", "latex", "make", "cmake", "markdown", "json", "lua", "verilog"},
@@ -88,9 +105,7 @@ require'nvim-treesitter.configs'.setup {
     },
   },
 }
-EOF
 
-lua << EOF
 require("nvim-tree").setup({
 --    open_on_setup=true,
 --    open_on_setup_file=true,
@@ -177,6 +192,21 @@ require('rose-pine').setup({
         StatusLine = { fg = '#000000', bg = 'love', blend = 70 },
     }
 })
+
+require("catppuccin").setup({
+    color_overrides = {
+        latte = {
+            base = "#f5f5dc",
+            mantle = "#ffdac4"
+        },
+        frappe = {
+            text = "#f5f5dc"
+        }
+    },
+    integrations = {
+        barbar = true
+    }
+})
 EOF
 
 nnoremap <silent>   <C-h> <Cmd>BufferPrevious<CR>
@@ -185,5 +215,10 @@ nnoremap <silent>   <C-x> <Cmd>BufferClose<CR>
 nnoremap <silent>   <C-j> <Cmd>BufferMovePrevious<CR>
 nnoremap <silent>   <C-k> <Cmd>BufferMoveNext<CR>
 
+augroup TextLike
+    autocmd!
+    autocmd FileType markdown set textwidth=80 gggqG
+augroup END
+
 set background=light
-colorscheme rose-pine
+colorscheme catppuccin-frappe
