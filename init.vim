@@ -19,13 +19,8 @@ let g:do_filetype_lua=1
 
 call plug#begin()
 
-" Writing plugins
-" Plug 'lukas-reineke/headlines.nvim'
-Plug 'ellisonleao/glow.nvim'
-
 " Theme plugins
-Plug 'rose-pine/neovim'
-Plug 'catppuccin/nvim', { 'as': 'catppuccin' }  " IN USE
+Plug 'yorickpeterse/vim-paper'
 
 " Tree sitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -37,20 +32,12 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
 
-Plug 'Pocco81/true-zen.nvim'
-
 " Syntax plugins for tree-sitter.
 Plug 'Qiskit/openqasm', {'rtp': 'plugins/vim/'}
 
 call plug#end()
 
 lua << EOF
-require('glow').setup({
-    width_ratio = 0.9,
-    height_ratio = 0.9,
-    border = 'rounded'
-})
-
 require'nvim-treesitter.configs'.setup {
     -- A list of parser names, or "all"
   ensure_installed = { "c", "python", "cpp", "latex", "make", "cmake", "markdown", "json", "lua", "verilog"},
@@ -133,82 +120,11 @@ require("nvim-tree").setup({
     },
     filters = {
         dotfiles=true, },
-
 })
 EOF
 
 lua << EOF
 require("nvim-tree.api").tree.open()
-EOF
-
-lua << EOF
-require('rose-pine').setup({
-    --- @usage 'auto'|'main'|'moon'|'dawn'
-    variant = 'dawn',
-    --- @usage 'main'|'moon'|'dawn'
-    dark_variant = 'main',
-    bold_vert_split = true,
-    dim_nc_background = false,
-    disable_background = true,
-    disable_float_background = false,
-    disable_italics = false,
-
-    --- @usage string hex value or named color from rosepinetheme.com/palette
-    groups = {
-        background = 'base',
-        background_nc = '_experimental_nc',
-        panel = 'surface',
-        panel_nc = 'base',
-        border = 'highlight_med',
-        comment = '#8f1a54',
----     comment = '#b5f5f2',
-        link = 'iris',
-        punctuation = 'subtle',
-
-        error = 'love',
-        hint = 'iris',
-        info = 'foam',
-        warn = 'gold',
-
-        headings = {
-            h1 = 'iris',
-            h2 = 'foam',
-            h3 = 'rose',
-            h4 = 'gold',
-            h5 = 'pine',
-            h6 = 'foam',
-        }
-        -- or set all headings at once
-        -- headings = 'subtle'
-    },
-
-    -- Change specific vim highlight groups
-    -- https://github.com/rose-pine/neovim/wiki/Recipes
-    highlight_groups = {
-        ColorColumn = { bg = 'rose' },
-
-        -- Blend colours against the "base" background
----     CursorLine = { bg = '#eeffff', blend = 10 },
----     CursorLine = { bg = '#273170' },
-        CursorLine = { bg = '#ffd2e8', blend = 100 },
-        StatusLine = { fg = '#000000', bg = 'love', blend = 70 },
-    }
-})
-
-require("catppuccin").setup({
-    color_overrides = {
-        latte = {
-            base = "#f5f5dc",
-            mantle = "#ffdac4"
-        },
-        frappe = {
-            text = "#f5f5dc"
-        }
-    },
-    integrations = {
-        barbar = true
-    }
-})
 EOF
 
 nnoremap <silent>   <C-h> <Cmd>BufferPrevious<CR>
@@ -222,5 +138,4 @@ augroup TextLike
     autocmd FileType markdown set textwidth=80 gggqG
 augroup END
 
-set background=light
-colorscheme catppuccin-frappe
+colorscheme paper
